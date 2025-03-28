@@ -16,7 +16,7 @@ const SwipeableDrawerWithClasses = SwipeableDrawer as unknown as React.Component
 interface SwipeablePanelProps {
   showPanelSelector: (state: any) => boolean
   toggleActionCreator: (payload: { value?: boolean }) => any
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 /**

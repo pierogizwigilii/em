@@ -33,6 +33,7 @@ import Sidebar from './Sidebar'
 import Tips from './Tips/Tips'
 import Toolbar from './Toolbar'
 import Tutorial from './Tutorial'
+import ViewOptionsPanel from './ViewOptions/ViewOptionsPanel'
 import * as modals from './modals'
 
 // This can be removed once Split Pane is working.
@@ -284,6 +285,7 @@ const AppComponent: FC = () => {
           <NavBar position='bottom' />
 
           <CommandMenuPanel />
+          <ViewOptionsPanel />
           {/* <div style={{ fontSize }}>
             <Footer />
           </div> */}

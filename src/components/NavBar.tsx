@@ -1,7 +1,8 @@
 import { useRef } from 'react'
-import { shallowEqual, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { css } from '../../styled-system/css'
 import Path from '../@types/Path'
+import { toggleViewOptionsActionCreator } from '../actions/toggleViewOptions'
 import { isTouch } from '../browser'
 import { BASE_FONT_SIZE } from '../constants'
 import isTutorial from '../selectors/isTutorial'
@@ -13,6 +14,7 @@ import FadeTransition from './FadeTransition'
 import HomeLink from './HomeLink'
 import InvitesButton from './InvitesButton'
 import Scale from './Scale'
+import ViewOptionsIcon from './icons/ViewOptionsIcon'
 
 /** Renders ContextBreadcrumbs for the cursor. */
 const CursorBreadcrumbs = ({ position }: { position: string }) => {
@@ -44,6 +46,7 @@ const CursorBreadcrumbs = ({ position }: { position: string }) => {
 
 /** A navigation bar that contains a link to home and breadcrumbs. */
 const NavBar = ({ position }: { position: string }) => {
+  const dispatch = useDispatch()
   const isTutorialOn = useSelector(isTutorial)
   const authenticated = useSelector(state => state.authenticated)
   const editing = useSelector(state => state.editing)
@@ -125,6 +128,25 @@ const NavBar = ({ position }: { position: string }) => {
                     </div>
                   </FadeTransition>
 
+                  <button
+                    className={css({
+                      position: 'relative',
+                      zIndex: 'stack',
+                      borderRadius: '24px',
+                      border: '1px solid',
+                      borderColor: 'darkgray',
+                      backgroundColor: 'darkgray',
+                      padding: '6px',
+                      width: '38px',
+                      height: '38px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    })}
+                    onClick={() => dispatch(toggleViewOptionsActionCreator({ value: true }))}
+                  >
+                    <ViewOptionsIcon size={24} />
+                  </button>
                   <div
                     className={css({
                       display: 'grid',

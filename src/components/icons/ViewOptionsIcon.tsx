@@ -1,6 +1,7 @@
 import { css } from '../../../styled-system/css'
 import { token } from '../../../styled-system/tokens'
 
+/** View options icon. */
 const ViewOptionsIcon = () => {
   return (
     <svg width='1em' viewBox='0 0 24 15' className={css({ cursor: 'pointer', pointerEvents: 'all' })}>

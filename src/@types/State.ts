@@ -167,10 +167,10 @@ interface State {
   transientFocus?: boolean
   /** Undo history. Contains diffs that can be applied to State to revert actions. State.undoPatches[0] is the oldest. */
   undoPatches: Patch[]
-  /** Whether the command menu is open. */
-  commandMenuOpen: boolean
-  /** The active radio button. */
-  activeRadioButton: string
+  /** Determines if the command menu is open or closed. */
+  showCommandMenu: boolean
+  /** Determines if the view options panel is open or closed. */
+  showViewOptions: boolean
 }
 
 export default State

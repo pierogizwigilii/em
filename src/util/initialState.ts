@@ -152,8 +152,8 @@ const initialState = (created: Timestamp = timestamp()) => {
     pushQueue: [],
     thoughts: initialThoughts(created),
     undoPatches: [],
-    commandMenuOpen: false,
-    activeRadioButton: '',
+    showCommandMenu: false,
+    showViewOptions: false,
   }
 
   /**

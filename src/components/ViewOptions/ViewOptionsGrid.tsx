@@ -2,12 +2,15 @@ import pin from '../../commands/pin'
 import pinAll from '../../commands/pinAll'
 import proseView from '../../commands/proseView'
 import subcategorizeOne from '../../commands/subcategorizeOne'
-import toggleTableView from '../../commands/toggleTableView'
 import toggleDone from '../../commands/toggleDone'
+import toggleTableView from '../../commands/toggleTableView'
 import PanelCommand from '../CommandMenu/PanelCommand'
 import PanelCommandGroup from '../CommandMenu/PanelCommandGroup'
 import PanelGrid from '../SwipeablePanel/PanelGrid'
 
+/**
+ * A grid of commands for the View Options feature.
+ */
 const ViewOptionsGrid = () => {
   return (
     <PanelGrid>

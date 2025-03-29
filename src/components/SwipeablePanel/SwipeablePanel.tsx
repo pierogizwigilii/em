@@ -1,6 +1,6 @@
 import SwipeableDrawer, { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer'
 import _ from 'lodash'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { css } from '../../../styled-system/css'
 import { token } from '../../../styled-system/tokens'
@@ -8,6 +8,7 @@ import { toggleCommandMenuActionCreator } from '../../actions/toggleCommandMenu'
 import { toggleViewOptionsActionCreator } from '../../actions/toggleViewOptions'
 import { isTouch } from '../../browser'
 import isTutorial from '../../selectors/isTutorial'
+import store from '../../stores/app'
 import CloseIcon from '../icons/CloseIcon'
 
 // Extend SwipeableDrawer with classes prop
@@ -37,22 +38,30 @@ const SwipeablePanel: React.FC<SwipeablePanelProps> = ({
   const containerRef = useRef<HTMLInputElement>(null)
   const [isSwiping, setIsSwiping] = useState(false)
 
-  /** Toggle the command menu. */
+  /** Toggle the panel. */
   const togglePanel = (value: boolean) => {
-    if (value) {
-      if (id === 'command-menu') {
+    dispatch(toggleActionCreator({ value }))
+  }
+
+  /**
+   * Close the other panel when one is already opened.
+   */
+  useEffect(() => {
+    if (showPanel) {
+      const state = store.getState()
+
+      if (id === 'command-menu' && state.showViewOptions) {
         dispatch(toggleViewOptionsActionCreator({ value: false }))
-      } else if (id === 'view-options') {
+      } else if (id === 'view-options' && state.showCommandMenu) {
         dispatch(toggleCommandMenuActionCreator({ value: false }))
       }
     }
-    dispatch(toggleActionCreator({ value }))
-  }
+  }, [showPanel, id, dispatch])
 
   if (isTouch && !isTutorialOn) {
     return (
       <SwipeableDrawerWithClasses
-        data-testid='command-menu-panel'
+        data-testid={`swipeable-panel-${id}`}
         classes={{
           root: css({
             userSelect: 'none',
@@ -148,7 +157,7 @@ const SwipeablePanel: React.FC<SwipeablePanelProps> = ({
             })}
           >
             <button
-              onClick={() => dispatch(toggleActionCreator({ value: false }))}
+              onClick={() => togglePanel(false)}
               className={css({
                 backgroundColor: 'transparent',
                 border: 'none',

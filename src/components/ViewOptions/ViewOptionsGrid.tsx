@@ -7,6 +7,7 @@ import toggleTableView from '../../commands/toggleTableView'
 import PanelCommand from '../CommandMenu/PanelCommand'
 import PanelCommandGroup from '../CommandMenu/PanelCommandGroup'
 import PanelGrid from '../SwipeablePanel/PanelGrid'
+import PanelHeader from '../SwipeablePanel/PanelHeader'
 import SortIcon from '../icons/SortIcon'
 
 /**
@@ -29,7 +30,7 @@ const ViewOptionsGrid = () => {
           justifyContent: 'center',
           fontWeight: 'bold',
           padding: '0.5rem',
-          borderRadius: '16px',
+          borderRadius: '22px',
           backgroundColor: 'purple',
           gridColumn: 'span 2',
         })}
@@ -48,6 +49,7 @@ const ViewOptionsGrid = () => {
           <div className={css({ fontWeight: 'normal' })}>Descending</div>
         </div>
       </div>
+      <PanelHeader title='View as:' />
       <PanelCommandGroup>
         <PanelCommand command={{ ...toggleDone, label: 'Done' }} size='small' />
         <PanelCommand command={{ ...proseView, label: 'Prose' }} size='small' />

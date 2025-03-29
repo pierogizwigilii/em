@@ -1,5 +1,5 @@
-import { token } from '../../../styled-system/tokens'
 import { css } from '../../../styled-system/css'
+import { token } from '../../../styled-system/tokens'
 
 /**
  * A sort icon.

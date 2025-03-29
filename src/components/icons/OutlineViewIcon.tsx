@@ -2,7 +2,14 @@ import { token } from '../../../styled-system/tokens'
 
 /** OutlineView Icon without animation. */
 const OutlineViewIcon = ({ size = 18, fill = token('colors.fg') }) => (
-  <svg xmlns='http://www.w3.org/2000/svg' width={size} height={size} fill='none' viewBox='0 0 23 20' style={{ justifySelf: 'center' }}>
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width={size}
+    height={size}
+    fill='none'
+    viewBox='0 0 23 20'
+    style={{ justifySelf: 'center' }}
+  >
     <circle cx='8' cy='11' r='2' fill={fill}></circle>
     <circle cx='8' cy='18' r='2' fill={fill}></circle>
     <path stroke={fill} strokeLinecap='round' strokeWidth='2' d='M9 4h13M13 11h9M13 18h9'></path>

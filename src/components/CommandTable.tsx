@@ -70,6 +70,7 @@ const groups: {
       'swapNote',
       'toggleContextView',
       'proseView',
+      'outlineView',
       'toggleTableView',
       'toggleSort',
       'heading0',

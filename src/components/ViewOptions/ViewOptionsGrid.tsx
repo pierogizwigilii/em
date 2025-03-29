@@ -1,8 +1,8 @@
 import { css } from '../../../styled-system/css'
+import outlineView from '../../commands/outlineView'
 import pin from '../../commands/pin'
 import pinAll from '../../commands/pinAll'
 import proseView from '../../commands/proseView'
-import toggleDone from '../../commands/toggleDone'
 import toggleTableView from '../../commands/toggleTableView'
 import PanelCommand from '../SwipeablePanel/PanelCommand'
 import PanelGrid from '../SwipeablePanel/PanelGrid'
@@ -51,7 +51,7 @@ const ViewOptionsGrid = () => {
       </div>
       <PanelHeader title='View as:' />
       <PanelCommandGroup>
-        <PanelCommand command={{ ...toggleDone, label: 'Done' }} size='small' />
+        <PanelCommand command={{ ...outlineView, label: 'Outline' }} size='small' />
         <PanelCommand command={{ ...proseView, label: 'Prose' }} size='small' />
         <PanelCommand command={{ ...toggleTableView, label: 'Table' }} size='small' />
       </PanelCommandGroup>

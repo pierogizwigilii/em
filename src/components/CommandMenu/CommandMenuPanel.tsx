@@ -1,5 +1,5 @@
-import { useSelector, useDispatch } from 'react-redux'
-import { useRef, useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { toggleCommandMenuActionCreator } from '../../actions/toggleCommandMenu'
 import PanelCommandGrid from '../CommandMenu/PanelCommandGrid'
 import SwipeablePanel from '../SwipeablePanel/SwipeablePanel'
@@ -27,7 +27,7 @@ const CommandMenuPanel = () => {
     }
 
     prevCursorRef.current = cursor
-  }, [toggleCommandMenuActionCreator, showCommandMenuPanel, cursor, dispatch])
+  }, [showCommandMenuPanel, cursor, dispatch])
 
   return (
     <SwipeablePanel

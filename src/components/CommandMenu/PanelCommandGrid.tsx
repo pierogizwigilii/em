@@ -7,9 +7,9 @@ import subcategorizeAll from '../../commands/subcategorizeAll'
 import subcategorizeOne from '../../commands/subcategorizeOne'
 import swapParent from '../../commands/swapParent'
 import toggleDone from '../../commands/toggleDone'
+import PanelCommand from '../SwipeablePanel/PanelCommand'
 import PanelGrid from '../SwipeablePanel/PanelGrid'
-import PanelCommand from './PanelCommand'
-import PanelCommandGroup from './PanelCommandGroup'
+import PanelCommandGroup from '../SwipeablePanel/PanelGroup'
 
 /**
  * Displays the grid of commands for the command menu.

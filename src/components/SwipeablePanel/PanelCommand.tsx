@@ -34,7 +34,7 @@ const PanelCommand: FC<PanelCommandProps> = ({ command, className, size }) => {
   const handleTap = useCallback(
     (e: React.MouseEvent | React.TouchEvent) => {
       if (isButtonExecutable) {
-        executeCommandWithMulticursor(command, { store, type: 'commandMenu', event: e })
+        executeCommandWithMulticursor(command, { store, type: 'swipeablePanel', event: e })
         setIsAnimated(true)
       }
     },

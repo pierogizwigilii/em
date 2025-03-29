@@ -18,6 +18,7 @@ import { setCursorActionCreator as setCursor } from '../actions/setCursor'
 import { toggleColorPickerActionCreator as toggleColorPicker } from '../actions/toggleColorPicker'
 import { toggleCommandMenuActionCreator } from '../actions/toggleCommandMenu'
 import { toggleLetterCaseActionCreator as toggleLetterCase } from '../actions/toggleLetterCase'
+import { toggleViewOptionsActionCreator } from '../actions/toggleViewOptions'
 import { tutorialNextActionCreator as tutorialNext } from '../actions/tutorialNext'
 import { isMac, isTouch } from '../browser'
 import { commandEmitter } from '../commands'
@@ -497,13 +498,18 @@ const Editable = ({
       // Update editingValueUntrimmedStore with the current value
       editingValueUntrimmedStore.update(value)
 
-      const { dragHold, dragInProgress, showCommandMenu } = store.getState()
+      const { dragHold, dragInProgress, showCommandMenu, showViewOptions } = store.getState()
       if (!dragHold && !dragInProgress) {
         setCursorOnThought({ editing: true })
 
-        // Close command menu when entering edit mode on a touch device
-        if (showCommandMenu && isTouch) {
-          dispatch(toggleCommandMenuActionCreator({ value: false }))
+        // Close Command Menu and View Options when entering edit mode on a touch device
+        if (isTouch) {
+          if (showCommandMenu) {
+            dispatch(toggleCommandMenuActionCreator({ value: false }))
+          }
+          if (showViewOptions) {
+            dispatch(toggleViewOptionsActionCreator({ value: false }))
+          }
         }
       }
     },

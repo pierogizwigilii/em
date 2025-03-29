@@ -1,9 +1,11 @@
 import SwipeableDrawer, { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer'
 import _ from 'lodash'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { css } from '../../../styled-system/css'
 import { token } from '../../../styled-system/tokens'
+import { toggleCommandMenuActionCreator } from '../../actions/toggleCommandMenu'
+import { toggleViewOptionsActionCreator } from '../../actions/toggleViewOptions'
 import { isTouch } from '../../browser'
 import isTutorial from '../../selectors/isTutorial'
 import CloseIcon from '../icons/CloseIcon'
@@ -17,6 +19,7 @@ interface SwipeablePanelProps {
   showPanelSelector: (state: any) => boolean
   toggleActionCreator: (payload: { value?: boolean }) => any
   children?: React.ReactNode
+  id: string
 }
 
 /**
@@ -26,33 +29,23 @@ const SwipeablePanel: React.FC<SwipeablePanelProps> = ({
   showPanelSelector,
   toggleActionCreator,
   children,
+  id,
 }: SwipeablePanelProps) => {
   const dispatch = useDispatch()
   const showPanel = useSelector(showPanelSelector)
-  const cursor = useSelector(state => state.cursor)
   const isTutorialOn = useSelector(isTutorial)
   const containerRef = useRef<HTMLInputElement>(null)
   const [isSwiping, setIsSwiping] = useState(false)
-  const prevCursorRef = useRef(cursor)
-
-  useEffect(() => {
-    // Only close the command menu if cursor becomes inactive but make sure it doesn't close if the cursor is just switching
-    if (showPanel && !cursor) {
-      const timeoutId = setTimeout(() => {
-        // Check if cursor is still inactive after the delay
-        if (!cursor) {
-          dispatch(toggleActionCreator({ value: false }))
-        }
-      }, 200) // Small delay to allow for cursor switching
-
-      return () => clearTimeout(timeoutId)
-    }
-
-    prevCursorRef.current = cursor
-  }, [toggleActionCreator, showPanel, cursor, dispatch])
 
   /** Toggle the command menu. */
   const togglePanel = (value: boolean) => {
+    if (value) {
+      if (id === 'command-menu') {
+        dispatch(toggleViewOptionsActionCreator({ value: false }))
+      } else if (id === 'view-options') {
+        dispatch(toggleCommandMenuActionCreator({ value: false }))
+      }
+    }
     dispatch(toggleActionCreator({ value }))
   }
 

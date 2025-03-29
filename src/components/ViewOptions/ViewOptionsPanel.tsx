@@ -10,6 +10,7 @@ const ViewOptionsPanel = () => {
     <SwipeablePanel
       showPanelSelector={state => state.showViewOptions}
       toggleActionCreator={toggleViewOptionsActionCreator}
+      id='view-options'
     >
       <ViewOptionsGrid />
     </SwipeablePanel>

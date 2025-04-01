@@ -4,6 +4,7 @@ import OutlineViewIcon from '../components/icons/OutlineViewIcon'
 import { HOME_PATH } from '../constants'
 import attributeEquals from '../selectors/attributeEquals'
 import hasMulticursor from '../selectors/hasMulticursor'
+import rootedParentOf from '../selectors/rootedParentOf'
 import simplifyPath from '../selectors/simplifyPath'
 import head from '../util/head'
 import isDocumentEditable from '../util/isDocumentEditable'
@@ -25,19 +26,29 @@ const outlineViewCommand: Command = {
     if (!cursor) return
 
     const simplePath = simplifyPath(state, cursor)
+    const parentPath = simplifyPath(state, rootedParentOf(state, cursor))
 
     dispatch(
       toggleAttribute({
         path: simplePath,
-        values: ['=view', ''],
+        values: ['=view', ''], //remove attribute instead of empty string
+      }),
+    )
+
+    dispatch(
+      toggleAttribute({
+        path: parentPath,
+        values: ['=view', ''], //remove attribute instead of empty string
       }),
     )
   },
   isActive: state => {
     const { cursor } = state
     const path = cursor ? simplifyPath(state, cursor) : HOME_PATH
+    const parentPath = cursor ? simplifyPath(state, rootedParentOf(state, cursor)) : HOME_PATH
     return (
-      !attributeEquals(state, head(path), '=view', 'Prose') && !attributeEquals(state, head(path), '=view', 'Table')
+      !attributeEquals(state, head(path), '=view', 'Prose') &&
+      !attributeEquals(state, head(parentPath), '=view', 'Table')
     )
   },
 }

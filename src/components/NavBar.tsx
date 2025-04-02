@@ -128,25 +128,27 @@ const NavBar = ({ position }: { position: string }) => {
                     </div>
                   </FadeTransition>
 
-                  <button
-                    className={css({
-                      position: 'relative',
-                      zIndex: 'stack',
-                      borderRadius: '24px',
-                      border: '1px solid',
-                      borderColor: 'darkgray',
-                      backgroundColor: 'darkgray',
-                      padding: '6px',
-                      width: '38px',
-                      height: '38px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    })}
-                    onClick={() => dispatch(toggleViewOptionsActionCreator({ value: true }))}
-                  >
-                    <ViewOptionsIcon size={24} />
-                  </button>
+                  {isTouch && (
+                    <button
+                      className={css({
+                        position: 'relative',
+                        zIndex: 'stack',
+                        borderRadius: '24px',
+                        border: '1px solid',
+                        borderColor: 'darkgray',
+                        backgroundColor: 'darkgray',
+                        padding: '6px',
+                        width: '38px',
+                        height: '38px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      })}
+                      onClick={() => dispatch(toggleViewOptionsActionCreator({ value: true }))}
+                    >
+                      <ViewOptionsIcon size={24} />
+                    </button>
+                  )}
                   <div
                     className={css({
                       display: 'grid',

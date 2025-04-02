@@ -37,6 +37,32 @@ const SwipeablePanel: React.FC<SwipeablePanelProps> = ({
   const isTutorialOn = useSelector(isTutorial)
   const containerRef = useRef<HTMLInputElement>(null)
   const [isSwiping, setIsSwiping] = useState(false)
+  const cursor = useSelector(state => state.cursor)
+  const prevCursorRef = useRef(cursor)
+  const hadCursorWhileOpenRef = useRef(false)
+
+  useEffect(() => {
+    // Track if we've had an active cursor while the panel was open.
+    if (showPanel && cursor) {
+      hadCursorWhileOpenRef.current = true
+    } else if (!showPanel) {
+      // Reset when panel closes.
+      hadCursorWhileOpenRef.current = false
+    }
+
+    if (showPanel && !cursor) {
+      const timeoutId = setTimeout(() => {
+        // Allows panel to open when cursor is inactive initially but then initiates the auto-close logic to ensure the panel closes after a cursor was active and then inactive again.
+        if (!cursor && hadCursorWhileOpenRef.current) {
+          dispatch(toggleActionCreator({ value: false }))
+        }
+      }, 200) // Small delay to allow for cursor switching
+
+      return () => clearTimeout(timeoutId)
+    }
+
+    prevCursorRef.current = cursor
+  }, [showPanel, cursor, dispatch])
 
   /** Toggle the panel. */
   const togglePanel = (value: boolean) => {

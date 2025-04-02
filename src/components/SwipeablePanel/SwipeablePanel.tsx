@@ -62,7 +62,7 @@ const SwipeablePanel: React.FC<SwipeablePanelProps> = ({
     }
 
     prevCursorRef.current = cursor
-  }, [showPanel, cursor, dispatch])
+  }, [showPanel, cursor, dispatch, toggleActionCreator])
 
   /** Toggle the panel. */
   const togglePanel = (value: boolean) => {

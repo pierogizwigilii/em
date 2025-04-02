@@ -51,9 +51,9 @@ const ViewOptionsGrid = () => {
       </div>
       <PanelHeader title='View as:' />
       <PanelCommandGroup>
-        <PanelCommand command={{ ...outlineView, label: 'Outline' }} size='small' />
-        <PanelCommand command={{ ...proseView, label: 'Prose' }} size='small' />
-        <PanelCommand command={{ ...toggleTableView, label: 'Table' }} size='small' />
+        <PanelCommand command={{ ...outlineView, label: 'Outline' }} size='small' radioButton />
+        <PanelCommand command={{ ...proseView, label: 'Prose' }} size='small' radioButton />
+        <PanelCommand command={{ ...toggleTableView, label: 'Table' }} size='small' radioButton />
       </PanelCommandGroup>
     </PanelGrid>
   )

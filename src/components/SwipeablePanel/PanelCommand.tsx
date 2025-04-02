@@ -12,10 +12,11 @@ interface PanelCommandProps {
   command: Command
   size?: 'small' | 'medium' | 'large' | 'xlarge'
   className?: string
+  radioButton?: boolean
 }
 
 /** A single button in the Panel Command Grid. */
-const PanelCommand: FC<PanelCommandProps> = ({ command, className, size }) => {
+const PanelCommand: FC<PanelCommandProps> = ({ command, className, size, radioButton }) => {
   const [isAnimated, setIsAnimated] = useState(false)
 
   if (!command) {
@@ -33,12 +34,17 @@ const PanelCommand: FC<PanelCommandProps> = ({ command, className, size }) => {
   /** Handles the onClick event. Executes the command when tapped. */
   const handleTap = useCallback(
     (e: React.MouseEvent | React.TouchEvent) => {
+      // For radio buttons, prevent deselection when already active
+      if (radioButton && isButtonActive) {
+        return
+      }
+
       if (isButtonExecutable) {
         executeCommandWithMulticursor(command, { store, type: 'swipeablePanel', event: e })
         setIsAnimated(true)
       }
     },
-    [command, isButtonExecutable],
+    [command, isButtonExecutable, radioButton, isButtonActive],
   )
 
   return (

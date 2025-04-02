@@ -10,8 +10,9 @@ import { editingActionCreator as editing } from '../actions/editing'
 import { setCursorActionCreator as setCursor } from '../actions/setCursor'
 import { setDescendantActionCreator as setDescendant } from '../actions/setDescendant'
 import { setNoteFocusActionCreator as setNoteFocus } from '../actions/setNoteFocus'
-import { toggleCommandMenuActionCreator } from '../actions/toggleCommandMenu'
+import { toggleCommandMenuActionCreator as toggleCommandMenu } from '../actions/toggleCommandMenu'
 import { toggleNoteActionCreator as toggleNote } from '../actions/toggleNote'
+import { toggleViewOptionsActionCreator as toggleViewOptions } from '../actions/toggleViewOptions'
 import { isSafari, isTouch } from '../browser'
 import * as selection from '../device/selection'
 import store from '../stores/app'
@@ -100,9 +101,14 @@ const Note = React.memo(({ path }: { path: Path }) => {
   const onFocus = () => {
     const state = store.getState()
 
-    // Close command menu if it's open when focusing on a note.
-    if (state.showCommandMenu && isTouch) {
-      dispatch(toggleCommandMenuActionCreator({ value: false }))
+    // Close any open panels when focusing on a note
+    if (isTouch && (state.showCommandMenu || state.showViewOptions)) {
+      if (state.showCommandMenu) {
+        dispatch(toggleCommandMenu({ value: false }))
+      }
+      if (state.showViewOptions) {
+        dispatch(toggleViewOptions({ value: false }))
+      }
     }
 
     dispatch(
